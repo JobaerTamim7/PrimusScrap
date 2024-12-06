@@ -43,15 +43,15 @@ def main():
         while True:
             console.print("[italic green]Press c to change modifier[/]")
 
-            choice = Prompt.ask("Choose the type of fetch", choices=["static", "dynamic","c"])
+            choice = Prompt.ask("Choose the type of fetch [(s)tatic, (d)ynamic, (c)ancel]", choices=["s", "d","c"], show_choices=False)
             if choice == "c":
                 break
 
-            if choice == "static":
-                with_img = Prompt.ask("Download Image?", choices=["yes", "no"]) == "yes"
+            if choice == "s":
+                with_img = Prompt.ask("Download Image? [(y)es, (n)o]", choices=["y", "n"], show_choices=False) == "y"
                 static_fetch(modifier,with_img)
             
-            if choice == "dynamic":
+            if choice == "d":
                 total_tags = int(Prompt.ask("Number of product to list", default=60))
                 dynamic_fetch(base_url, modifier, total_tags, base_xpath)
 

@@ -42,7 +42,7 @@ class DynamicFetcher:
 
         if not self.driver:
             self.driver: Chrome = Chrome(options=self.options,service=self.service) 
-            return self.driver
+            # return self.driver
         
     def _count_condition(self,xpath: str, min_num: int):
         
@@ -77,6 +77,7 @@ class DynamicFetcher:
         WebDriverWait(driver=self.driver,timeout=20).until(lambda _: self._count_condition(xpath=xpath,min_num=min_num))
 
         return self.driver.page_source
+    
 
     def _dir_maker(self):
 
@@ -90,8 +91,6 @@ class DynamicFetcher:
         with open(file_path, "w") as file:
             file.write(BeautifulSoup(content, 'html.parser').prettify())        
 
-    def driver_quit(self):
-        self.driver.quit()    
 
 
 

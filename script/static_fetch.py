@@ -89,8 +89,9 @@ class StaticFetcher:
             table_rows = product_table.find_all("tr")
             product_name = product_page_soup.find("span", class_="base").text
             product_price = product_page_soup.find("span", class_="price").text
-           
-
+            product_description = product_page_soup.find("div", class_="product attribute description")
+            product_description = product_description.find("div", class_="value").text
+        
             img_url = self.get_img_url(product_page_soup)
             if not img_url:
                 console.print(f"[red]No Image Found for {product_name}[/]\n")
@@ -105,6 +106,7 @@ class StaticFetcher:
             info_dict["Image URL"] = img_url
             info_dict["Product Price"] = product_price
             info_dict["Product Name"] = product_name
+            info_dict["Description"] = product_description
             for row in table_rows:
                 key = row.find("th").text
                 value = row.find("td").text
