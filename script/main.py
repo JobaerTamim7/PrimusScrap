@@ -18,12 +18,14 @@ def static_fetch(modifier: str, isImage: bool):
         sfetcher.dump_json(isImage)
     except Exception as e:
         console.print(Panel(f"[red]Error {e}[/]"),justify="center")
-        return 
+    finally:
+        sfetcher.driver.quit()
 
 def dynamic_fetch(url, modifier, num, xpath):
     dfetcher = DynamicFetcher(url=url, modifier=modifier)
     content = dfetcher.fetch(xpath=xpath,min_num=num)
     dfetcher.save_html(content=content)
+    dfetcher.driver_quit()
 
 def main():
     base_url = "https://www.aarong.com/"

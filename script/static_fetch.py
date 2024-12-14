@@ -83,6 +83,7 @@ class StaticFetcher:
             product_page_soup = BeautifulSoup(self.driver.page_source, 'html.parser')
             # with open("test.html","w") as file:
             #     file.write(product_page_soup.prettify())
+
             info_dict = {}
 
             product_table = product_page_soup.find("table", class_="data table additional-attributes")
@@ -114,6 +115,10 @@ class StaticFetcher:
             info_list.append(info_dict)
             console.print(f"[green]Product {index+1}[/] [blue]{product_name}[/] [green]Fetched[/]\n")
         return info_list
+    
+    def driver_quit(self):
+        if self.driver:
+            self.driver.quit()
     
 
 

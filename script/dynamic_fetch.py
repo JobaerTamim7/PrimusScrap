@@ -76,6 +76,7 @@ class DynamicFetcher:
         self._scroll_page(xpath=xpath,min_num=min_num)
         WebDriverWait(driver=self.driver,timeout=20).until(lambda _: self._count_condition(xpath=xpath,min_num=min_num))
 
+
         return self.driver.page_source
     
 
@@ -90,8 +91,10 @@ class DynamicFetcher:
         file_path = self._dir_maker()
         with open(file_path, "w") as file:
             file.write(BeautifulSoup(content, 'html.parser').prettify())        
-
-
+        
+    def driver_quit(self):
+        if self.driver:
+            self.driver.quit()
 
 
 if __name__ == "__main__":
